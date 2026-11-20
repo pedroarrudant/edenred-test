@@ -1,11 +1,11 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace EdenredTest.Application.Shared.Models
+namespace EdenredTest.Application.Shared.Domain
 {
     public class Client
     {
         public long Id { get; set; }
-        public string FullName { get; set; }
+        public required string FullName { get; set; }
         public string IdentificationDocument { get; set; }
         public DateTime BirthDate { get; set; }
         public string Email { get; set; }

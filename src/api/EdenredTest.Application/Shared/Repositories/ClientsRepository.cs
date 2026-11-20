@@ -1,7 +1,7 @@
-﻿using EdenredTest.Application.Shared.Models;
-using Dapper;
+﻿using Dapper;
 using Microsoft.Extensions.Logging;
 using System.Data;
+using EdenredTest.Application.Shared.Domain;
 
 namespace EdenredTest.Application.Shared.Repositories
 {
@@ -109,6 +109,30 @@ namespace EdenredTest.Application.Shared.Repositories
             catch (Exception ex)
             {
                 _logger.LogError(ex, $"[{nameof(ClientsRepository)}][{nameof(GetAllClientsAsync)}] Error querying database");
+                throw;
+            }
+        }
+
+        public async Task<bool> GetClientByIdentificationDocument(string identificationDocument, CancellationToken cancellationToken)
+        {
+            _logger.LogInformation($"[{nameof(ClientsRepository)}][{nameof(GetClientByIdentificationDocument)}] Querying the database");
+
+            try
+            {
+                var client = await base.QueryFirstOrDefault<Client>("SELECT_CLIENTBYCPF", cancellationToken, new { identificationDocument });
+
+                _logger.LogInformation($"[{nameof(ClientsRepository)}][{nameof(GetClientByIdentificationDocument)}] Query concluded with success");
+
+                if (client is null)
+                {
+                    return false; 
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"[{nameof(ClientsRepository)}][{nameof(GetClientByIdentificationDocument)}] Error querying database");
                 throw;
             }
         }

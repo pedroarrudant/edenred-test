@@ -1,4 +1,4 @@
-using EdenredTest.Application.Shared.Models;
+using EdenredTest.Application.Shared.Domain;
 using Microsoft.Extensions.Logging;
 using System.Data;
 

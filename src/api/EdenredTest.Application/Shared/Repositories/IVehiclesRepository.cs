@@ -1,4 +1,4 @@
-using EdenredTest.Application.Shared.Models;
+using EdenredTest.Application.Shared.Domain;
 
 namespace EdenredTest.Application.Shared.Repositories
 {

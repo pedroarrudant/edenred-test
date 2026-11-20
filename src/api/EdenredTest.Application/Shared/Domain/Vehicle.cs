@@ -1,4 +1,4 @@
-﻿namespace EdenredTest.Application.Shared.Models
+﻿namespace EdenredTest.Application.Shared.Domain
 {
     public class Vehicle
     {

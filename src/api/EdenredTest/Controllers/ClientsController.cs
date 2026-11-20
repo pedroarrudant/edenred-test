@@ -3,12 +3,12 @@ using EdenredTest.Application.Features.InsertClient.Models;
 using EdenredTest.Application.Features.GetAllClients.Models;
 using EdenredTest.Application.Features.DeleteClient.Models;
 using EdenredTest.Application.Features.UpdateClient.Models;
-using EdenredTest.Application.Shared.Models;
 using EdenredTest.Controllers.Requests;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Npgsql;
 using System.Net;
+using EdenredTest.Application.Shared.Domain;
 
 namespace EdenredTest.Controllers
 {
@@ -57,7 +57,7 @@ namespace EdenredTest.Controllers
 
             var result = await _mediator.Send(new InsertClientInput { Client = client }, cancellationToken);
 
-            return result.Success ? NoContent() : BadRequest();
+            return result.Success ? NoContent() : BadRequest(result.Message);
         }
 
         [HttpPut("{id:long}")]
@@ -77,7 +77,7 @@ namespace EdenredTest.Controllers
 
             var updated = await _mediator.Send(new UpdateClientInput { Client = client }, cancellationToken);
 
-            return updated ? NoContent() : NotFound();
+            return updated.Success ? NoContent() : BadRequest(updated.Message);
         }
 
         [HttpDelete("{id:long}")]

@@ -3,7 +3,7 @@ using EdenredTest.Application.Features.GetAllVehicles.Models;
 using EdenredTest.Application.Features.GetVehicleById.Models;
 using EdenredTest.Application.Features.InsertVehicle.Models;
 using EdenredTest.Application.Features.UpdateVehicle.Models;
-using EdenredTest.Application.Shared.Models;
+using EdenredTest.Application.Shared.Domain;
 using EdenredTest.Controllers.Requests;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;

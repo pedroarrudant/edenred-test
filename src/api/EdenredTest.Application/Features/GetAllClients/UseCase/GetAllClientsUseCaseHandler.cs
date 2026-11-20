@@ -1,5 +1,5 @@
 using EdenredTest.Application.Features.GetAllClients.Models;
-using EdenredTest.Application.Shared.Models;
+using EdenredTest.Application.Shared.Domain;
 using EdenredTest.Application.Shared.Repositories;
 using MediatR;
 

@@ -1,4 +1,4 @@
-using EdenredTest.Application.Shared.Models;
+using EdenredTest.Application.Shared.Domain;
 using MediatR;
 
 namespace EdenredTest.Application.Features.InsertVehicle.Models

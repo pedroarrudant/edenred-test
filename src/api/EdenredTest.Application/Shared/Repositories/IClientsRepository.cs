@@ -1,4 +1,4 @@
-﻿using EdenredTest.Application.Shared.Models;
+﻿using EdenredTest.Application.Shared.Domain;
 
 namespace EdenredTest.Application.Shared.Repositories
 {
@@ -10,5 +10,6 @@ namespace EdenredTest.Application.Shared.Repositories
         public Task<bool> InsertClientAsync(Client client, CancellationToken cancellationToken);
         public Task<bool> UpdateClientAsync(Client client, CancellationToken cancellationToken);
         public Task<bool> DeleteClientAsync(long id, CancellationToken cancellationToken);
+        public Task<bool> GetClientByIdentificationDocument(string identificationDocument, CancellationToken cancellationToken);
     }
 }
