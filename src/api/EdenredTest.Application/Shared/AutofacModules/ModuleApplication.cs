@@ -21,6 +21,13 @@ namespace EdenredTest.Application.Shared.AutofacModules
                 var connection = new NpgsqlConnection(databaseOptions.Value.ConnectionString);
                 return new ClientsRepository(connection, logger);
             }).As<IClientsRepository>();
+
+            builder.Register(container =>
+            {
+                var databaseOptions = container.Resolve<IOptionsSnapshot<DatabaseOptions>>();
+                var connection = new NpgsqlConnection(databaseOptions.Value.ConnectionString);
+                return new VehiclesRepository(connection);
+            }).As<IVehiclesRepository>();
         }
     }
 }
