@@ -94,6 +94,25 @@ namespace EdenredTest.Application.Shared.Repositories
             }
         }
 
+        public async Task<IEnumerable<Client>> GetAllClientsAsync(CancellationToken cancellationToken)
+        {
+            _logger.LogInformation($"[{nameof(ClientsRepository)}][{nameof(GetAllClientsAsync)}] Querying the database");
+
+            try
+            {
+                var clients = await base.QueryAsync<Client>("SELECT_CLIENTS", cancellationToken);
+
+                _logger.LogInformation($"[{nameof(ClientsRepository)}][{nameof(GetAllClientsAsync)}] Query concluded with success");
+
+                return clients;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"[{nameof(ClientsRepository)}][{nameof(GetAllClientsAsync)}] Error querying database");
+                throw;
+            }
+        }
+
         private static DynamicParameters CreateClientParameters(Client client)
         {
             var parameters = new DynamicParameters();

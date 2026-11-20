@@ -58,6 +58,7 @@
     <EmbeddedResource Include="Shared\Queries\SELECT_CLIENTBYID.sql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="Shared\Queries\SELECT_CLIENTS.sql" />
     <EmbeddedResource Include="Shared\Queries\INSERT_CLIENT.sql" />
     <EmbeddedResource Include="Shared\Queries\UPDATE_CLIENT.sql" />
     <EmbeddedResource Include="Shared\Queries\DELETE_CLIENT.sql" />

@@ -1,5 +1,6 @@
 ﻿using EdenredTest.Application.Features.GetClientById.Models;
 using EdenredTest.Application.Features.InsertClient.Models;
+using EdenredTest.Application.Features.GetAllClients.Models;
 using EdenredTest.Application.Features.DeleteClient.Models;
 using EdenredTest.Application.Features.UpdateClient.Models;
 using EdenredTest.Application.Shared.Models;
@@ -32,6 +33,13 @@ namespace EdenredTest.Controllers
             var result = await _mediator.Send(new GetClientByIdInput() { Id = id }, cancellationToken);
 
             return result?.client;
+        }
+
+        [HttpGet]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        public async Task<IEnumerable<Client>> GetAllClients(CancellationToken cancellationToken) //TODO: Needs pagination
+        {
+            return await _mediator.Send(new GetAllClientsInput(), cancellationToken);
         }
 
         [HttpPost]
