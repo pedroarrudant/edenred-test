@@ -6,6 +6,7 @@ namespace EdenredTest.Application.Shared.Repositories
     {
         Task<Vehicle?> GetVehicleById(long id, CancellationToken cancellationToken);
         Task<IEnumerable<Vehicle>> GetAllVehiclesAsync(CancellationToken cancellationToken);
+        Task<bool> LicensePlateExistsAsync(string licensePlate, long? excludedVehicleId, CancellationToken cancellationToken);
         Task<bool> InsertVehicleAsync(Vehicle vehicle, CancellationToken cancellationToken);
         Task<bool> UpdateVehicleAsync(Vehicle vehicle, CancellationToken cancellationToken);
         Task<bool> DeleteVehicleAsync(long id, CancellationToken cancellationToken);

@@ -1,10 +1,12 @@
 using EdenredTest.Application.Features.InsertVehicle.Models;
 using EdenredTest.Application.Shared.Repositories;
+using EdenredTest.Application.Shared.Models;
+using EdenredTest.Application.Shared.Services;
 using MediatR;
 
 namespace EdenredTest.Application.Features.InsertVehicle.UseCase
 {
-    public class InsertVehicleUseCaseHandler : IRequestHandler<InsertVehicleInput, bool>
+    public class InsertVehicleUseCaseHandler : IRequestHandler<InsertVehicleInput, VehicleWriteOutput>
     {
         private readonly IVehiclesRepository _repository;
 
@@ -13,9 +15,10 @@ namespace EdenredTest.Application.Features.InsertVehicle.UseCase
             _repository = repository;
         }
 
-        public Task<bool> Handle(InsertVehicleInput request, CancellationToken cancellationToken)
+        public Task<VehicleWriteOutput> Handle(InsertVehicleInput request, CancellationToken cancellationToken)
         {
-            return _repository.InsertVehicleAsync(request.Vehicle, cancellationToken);
+            return VehicleWriteValidation.ValidateAndWriteAsync(
+                _repository, request.Vehicle, null, _repository.InsertVehicleAsync, cancellationToken);
         }
     }
 }

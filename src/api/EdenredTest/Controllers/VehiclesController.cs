@@ -51,10 +51,16 @@ namespace EdenredTest.Controllers
 
             var inserted = await _mediator.Send(new InsertVehicleInput { Vehicle = vehicle }, cancellationToken);
 
-            return inserted ? NoContent() : BadRequest();
+            if (!inserted.Success)
+            {
+                return BadRequest(inserted.Message);
+            }
+
+            return NoContent();
         }
 
         [HttpPut("{id:long}")]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         public async Task<IActionResult> UpdateVehicle([FromRoute] long id, [FromBody] InsertVehicleRequest request, CancellationToken cancellationToken)
@@ -70,7 +76,17 @@ namespace EdenredTest.Controllers
 
             var updated = await _mediator.Send(new UpdateVehicleInput { Vehicle = vehicle }, cancellationToken);
 
-            return updated ? NoContent() : NotFound();
+            if (!updated.Success)
+            {
+                if (!string.IsNullOrEmpty(updated.Message))
+                {
+                    return BadRequest(updated.Message);
+                }
+
+                return NotFound();
+            }
+
+            return NoContent();
         }
 
         [HttpDelete("{id:long}")]

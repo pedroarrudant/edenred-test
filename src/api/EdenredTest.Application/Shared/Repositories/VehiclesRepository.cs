@@ -49,6 +49,14 @@ namespace EdenredTest.Application.Shared.Repositories
             }
         }
 
+        public Task<bool> LicensePlateExistsAsync(string licensePlate, long? excludedVehicleId, CancellationToken cancellationToken)
+        {
+            return QueryFirstOrDefault<bool>(
+                "SELECT_VEHICLE_LICENSE_PLATE_EXISTS",
+                cancellationToken,
+                new { LicensePlate = licensePlate, ExcludedVehicleId = excludedVehicleId });
+        }
+
         public async Task<bool> InsertVehicleAsync(Vehicle vehicle, CancellationToken cancellationToken)
         {
             _logger.LogInformation($"[{nameof(VehiclesRepository)}][{nameof(InsertVehicleAsync)}] Querying the database");

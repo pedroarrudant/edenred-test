@@ -63,6 +63,7 @@
     <EmbeddedResource Include="Shared\Queries\DELETE_CLIENT.sql" />
     <EmbeddedResource Include="Shared\Queries\SELECT_VEHICLEBYID.sql" />
     <EmbeddedResource Include="Shared\Queries\SELECT_VEHICLES.sql" />
+    <EmbeddedResource Include="Shared\Queries\SELECT_VEHICLE_LICENSE_PLATE_EXISTS.sql" />
     <EmbeddedResource Include="Shared\Queries\INSERT_VEHICLE.sql" />
     <EmbeddedResource Include="Shared\Queries\UPDATE_VEHICLE.sql" />
     <EmbeddedResource Include="Shared\Queries\DELETE_VEHICLE.sql" />
