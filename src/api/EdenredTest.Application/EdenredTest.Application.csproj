@@ -11,7 +11,6 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
     <PackageReference Include="Autofac" Version="6.4.0" />
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="8.0.0" />
-    <PackageReference Include="MassTransit.RabbitMQ" Version="8.0.6" />
     <PackageReference Include="MassTransit.AspNetCore" Version="7.3.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0" />
@@ -27,23 +26,13 @@
     <None Remove="Shared\" />
     <None Remove="Shared\AutofacModules\" />
     <None Remove="Features\GetPetsByName\" />
-    <None Remove="Features\GetPetsByName\DTO\" />
-    <None Remove="Features\GetPetsByName\Interfaces\" />
-    <None Remove="Features\GetPetsByName\Models\" />
-    <None Remove="Features\GetPetsByName\Repositories\" />
-    <None Remove="Features\GetPetsByName\UseCase\" />
     <None Remove="Dapper" />
     <None Remove="MediatR" />
     <None Remove="Polly" />
     <None Remove="Microsoft.Data.SqlClient" />
     <None Remove="Shared\Queries\SELECT_CLIENTBYID.sql" />
-    <None Remove="Shared\Queries\SELECT_PET.sql" />
-    <None Remove="Features\InsertPet\Repositories\" />
     <None Remove="Entrypoint\" />
-    <None Remove="Entrypoint\Consumer\" />
     <None Remove="Shared\Queries\SELECT_PET %28copiar%29.sql" />
-    <None Remove="Entrypoint\Observer\" />
-    <None Remove="Entrypoint\DeadLetter\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Shared\AutofacModules\" />
@@ -59,17 +48,6 @@
     <Folder Include="Shared\Services\" />
     <Folder Include="Shared\Results\" />
     <Folder Include="Shared\ValueObjects\" />
-    <Folder Include="Features\GetPetsByName\" />
-    <Folder Include="Features\GetPetsByName\DTO\" />
-    <Folder Include="Features\GetPetsByName\Interfaces\" />
-    <Folder Include="Features\GetPetsByName\Models\" />
-    <Folder Include="Features\GetPetsByName\Repositories\" />
-    <Folder Include="Features\GetPetsByName\UseCase\" />
-    <Folder Include="Features\InsertPet\Repositories\" />
-    <Folder Include="Entrypoint\" />
-    <Folder Include="Entrypoint\Consumer\" />
-    <Folder Include="Entrypoint\Observer\" />
-    <Folder Include="Entrypoint\DeadLetter\" />
   </ItemGroup>
   <ItemGroup>
     <None Update="Shared\Queries\SELECT_PET.sql">
@@ -78,12 +56,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Shared\Queries\SELECT_CLIENTBYID.sql">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Shared\Queries\SELECT_PET.sql">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Shared\Queries\INSERT_PET.sql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Shared\Queries\INSERT_CLIENT.sql" />

@@ -21,12 +21,10 @@ builder.Services.AddCustomConfiguration(builder.Configuration);
 builder.Services.AddHttpClientServices();
 builder.Services.AddAutofac();
 builder.Services.AddMediatR(Assembly.GetExecutingAssembly(), Assembly.Load(new AssemblyName("EdenredTest.Application")));
-builder.Services.AddRabbitMqServices(builder.Configuration);
 
 builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
 builder.Host.ConfigureContainer<ContainerBuilder>(builder => builder.RegisterModule(new ModuleApplication()));
 builder.Host.ConfigureContainer<ContainerBuilder>(builder => builder.RegisterModule(new ModuleHandler()));
-builder.Host.ConfigureContainer<ContainerBuilder>(builder => builder.RegisterModule(new ModuleInternalServices()));
 builder.Host.ConfigureContainer<ContainerBuilder>(builder => builder.RegisterModule(new ModuleMediator()));
 
 
