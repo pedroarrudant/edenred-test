@@ -15,7 +15,7 @@ export class VehicleList implements OnInit {
   isLoading = signal(true);
   errorMessage = signal('');
 
-  displayedColumns = ['licensePlate', 'manufactureYear', 'brand', 'model'];
+  displayedColumns = ['licensePlate', 'manufactureYear', 'brand', 'model', 'clientId', 'clientName'];
 
   ngOnInit(): void {
     this.http.get<Vehicle[]>(`${environment.apiUrl}/vehicles`).subscribe({

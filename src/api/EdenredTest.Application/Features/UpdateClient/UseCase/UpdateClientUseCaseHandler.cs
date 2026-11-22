@@ -1,4 +1,3 @@
-using EdenredTest.Application.Features.InsertClient.Models;
 using EdenredTest.Application.Features.InsertClient.UseCase;
 using EdenredTest.Application.Features.UpdateClient.Models;
 using EdenredTest.Application.Shared.Constants;
@@ -57,7 +56,7 @@ namespace EdenredTest.Application.Features.UpdateClient.UseCase
 
             var result = await _repository.UpdateClientAsync(request.Client, cancellationToken);
 
-            return new UpdatedClientOutput { Success = result};
+            return new UpdatedClientOutput { Success = result };
         }
     }
 }

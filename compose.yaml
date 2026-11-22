@@ -1,0 +1,39 @@
+name: api
+
+services:
+  frontend:
+    build: ./src/front/edenred-test
+    depends_on:
+      - backend
+    ports:
+      - "127.0.0.1:4200:80"
+
+  backend:
+    build: ./src/api
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      ASPNETCORE_HTTP_PORTS: "8080"
+      SqlServer__ConnectionString: >-
+        Host=postgres;Port=5432;Database="${POSTGRES_DB:-edenred}";Username="${POSTGRES_USER:-edenred}";Password="${POSTGRES_PASSWORD:-YourStr0ngP@ssword}"
+
+  postgres:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-edenred}
+      POSTGRES_USER: ${POSTGRES_USER:-edenred}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-YourStr0ngP@ssword}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./src/api/Scripts/Database-creation.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -h 127.0.0.1 -U \"$$POSTGRES_USER\" -d \"$$POSTGRES_DB\""]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+volumes:
+  postgres_data:

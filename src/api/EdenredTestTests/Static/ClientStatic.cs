@@ -1,7 +1,4 @@
 using EdenredTest.Application.Shared.Domain;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace EdenredTestTests.Static
 {

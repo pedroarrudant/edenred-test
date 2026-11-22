@@ -9,18 +9,18 @@ CREATE TABLE Clients (
 
 CREATE TABLE Vehicles (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    client_id BIGINT REFERENCES clients(id),
+    client_id BIGINT NOT NULL REFERENCES clients(id),
     license_plate VARCHAR(10),
     manufacture_year INTEGER,
     make VARCHAR(100),
     model VARCHAR(100)
 );
 
-INSERT INTO public.clients (full_name, identification_document, birth_date, email, phone)
-VALUES (
-    'Pedro Arruda',
-    '41256211877',
-    '1993-01-06',
-    'pedro.arruda@outlook.com.br',
-    '11941622236'
-);
+WITH mock_client AS (
+    INSERT INTO public.clients (full_name, identification_document, birth_date, email, phone)
+    VALUES ('Marina Exemplo', '00000000000', DATE '1990-01-01', 'marina@example.com', '11000000000')
+    RETURNING id
+)
+INSERT INTO public.vehicles (client_id, license_plate, manufacture_year, make, model)
+SELECT id, 'TST0A00', 2022, 'Fiat', 'Argo'
+FROM mock_client;

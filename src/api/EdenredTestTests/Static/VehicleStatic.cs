@@ -7,6 +7,7 @@ namespace EdenredTestTests.Static
         public static Vehicle Create() => new Vehicle()
         {
             Id = 1,
+            ClientId = 1,
             LicensePlate = "ABC1D23",
             ManufactureYear = 2020,
             Brand = "Toyota",

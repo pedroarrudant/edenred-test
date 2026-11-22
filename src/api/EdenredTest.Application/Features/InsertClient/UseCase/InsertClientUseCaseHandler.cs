@@ -48,7 +48,7 @@ namespace EdenredTest.Application.Features.InsertClient.UseCase
 
                 _logger.LogInformation($"[{nameof(InsertClientUseCaseHandler)}][{nameof(Handle)}] {errorMessage}");
 
-                return new InsertClientOutput { Success = false,  Message = errorMessage};
+                return new InsertClientOutput { Success = false, Message = errorMessage };
             }
 
             var success = await _repository.InsertClientAsync(request?.Client, cancellationToken);

@@ -1,5 +1,5 @@
-using MediatR;
 using EdenredTest.Application.Shared.Domain;
+using MediatR;
 
 namespace EdenredTest.Application.Features.UpdateClient.Models
 {

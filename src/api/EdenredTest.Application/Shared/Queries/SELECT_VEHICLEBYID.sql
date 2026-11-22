@@ -1,8 +1,11 @@
 SELECT
-    id AS "Id",
-    license_plate AS "LicensePlate",
-    manufacture_year AS "ManufactureYear",
-    make AS "Brand",
-    model AS "Model"
-FROM Vehicles
-WHERE id = @Id;
+    v.id AS "Id",
+    v.client_id AS "ClientId",
+    c.full_name AS "ClientName",
+    v.license_plate AS "LicensePlate",
+    v.manufacture_year AS "ManufactureYear",
+    v.make AS "Brand",
+    v.model AS "Model"
+FROM Vehicles v
+LEFT JOIN Clients c ON c.id = v.client_id
+WHERE v.id = @Id;

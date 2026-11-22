@@ -10,21 +10,22 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers(options => {
+builder.Services.AddControllers(options =>
+{
     options.Filters.Add(typeof(HttpGlobalExceptionFilter));
 });
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddCustomSwagger();
 builder.Services.AddCustomConfiguration(builder.Configuration);
-builder.Services.AddHttpClientServices();
 builder.Services.AddAutofac();
 builder.Services.AddMediatR(Assembly.GetExecutingAssembly(), Assembly.Load(new AssemblyName("EdenredTest.Application")));
 
 var allowedOrigins =
     builder.Configuration.GetSection("Cors:AllowedOrigins").Get<string[]>() ?? [];
 
-builder.Services.AddCors(options => {
+builder.Services.AddCors(options =>
+{
     options.AddPolicy("FrontEnd", policy =>
     {
         policy

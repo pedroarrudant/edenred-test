@@ -1,9 +1,8 @@
-﻿using System;
-using System.Net;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using System.Net;
 
 namespace EdenredTest.Application.Shared.Filters
 {
@@ -30,7 +29,7 @@ namespace EdenredTest.Application.Shared.Filters
             }
 
             context.ExceptionHandled = true;
-            context.Result = new ObjectResult(new { message = "Por favor contate o administrador"});
+            context.Result = new ObjectResult(new { message = "Por favor contate o administrador" });
             context.HttpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
         }
     }

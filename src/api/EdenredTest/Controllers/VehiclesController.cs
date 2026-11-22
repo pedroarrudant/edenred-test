@@ -43,6 +43,7 @@ namespace EdenredTest.Controllers
         {
             var vehicle = new Vehicle
             {
+                ClientId = request.ClientId,
                 LicensePlate = request.LicensePlate,
                 ManufactureYear = request.ManufactureYear,
                 Brand = request.Brand,

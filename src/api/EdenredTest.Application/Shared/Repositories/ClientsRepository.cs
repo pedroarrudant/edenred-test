@@ -1,7 +1,7 @@
 ﻿using Dapper;
+using EdenredTest.Application.Shared.Domain;
 using Microsoft.Extensions.Logging;
 using System.Data;
-using EdenredTest.Application.Shared.Domain;
 
 namespace EdenredTest.Application.Shared.Repositories
 {
@@ -30,11 +30,9 @@ namespace EdenredTest.Application.Shared.Repositories
                 _logger.LogError(ex, $"[{nameof(ClientsRepository)}][{nameof(GetClientById)}] Error querying database");
                 throw;
             }
-
-            return default;
         }
 
-        public async Task<bool> InsertClientAsync(Client client, CancellationToken cancellationToken) 
+        public async Task<bool> InsertClientAsync(Client client, CancellationToken cancellationToken)
         {
             _logger.LogInformation($"[{nameof(ClientsRepository)}][{nameof(InsertClientAsync)}] Querying in the respository");
 
@@ -53,8 +51,6 @@ namespace EdenredTest.Application.Shared.Repositories
                 _logger.LogError(ex, $"[{nameof(ClientsRepository)}][{nameof(InsertClientAsync)}] Error querying database");
                 throw;
             }
-
-            return false;
         }
 
         public async Task<bool> UpdateClientAsync(Client client, CancellationToken cancellationToken)
@@ -125,7 +121,7 @@ namespace EdenredTest.Application.Shared.Repositories
 
                 if (client is null)
                 {
-                    return false; 
+                    return false;
                 }
 
                 return true;

@@ -18,6 +18,7 @@ export class ClientList implements OnInit {
   errorMessage = signal('');
 
   displayedColumns = [
+    'id',
     'fullName',
     'identificationDocument',
     'birthDate',

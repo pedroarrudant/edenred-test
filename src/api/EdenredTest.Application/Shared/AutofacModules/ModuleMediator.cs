@@ -1,8 +1,7 @@
-﻿using System;
+﻿using Autofac;
+using MediatR;
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
-using Autofac;
-using MediatR;
 
 namespace EdenredTest.Application.Shared.AutofacModules
 {

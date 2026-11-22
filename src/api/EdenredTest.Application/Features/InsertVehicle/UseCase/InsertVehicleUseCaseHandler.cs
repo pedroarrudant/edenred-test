@@ -22,6 +22,11 @@ namespace EdenredTest.Application.Features.InsertVehicle.UseCase
         {
             var vehicle = request.Vehicle;
 
+            if (vehicle.ClientId is null or <= 0)
+            {
+                return new VehicleWriteOutput { Success = false, Message = Messages.Error.ClientRequired };
+            }
+
             if (vehicle.ManufactureYear > DateTime.Now.Year)
             {
                 var errorMessage = Messages.Error.InvalidManufactureYear;
@@ -40,7 +45,7 @@ namespace EdenredTest.Application.Features.InsertVehicle.UseCase
             }
 
             var success = await _repository.InsertVehicleAsync(vehicle, cancellationToken);
-            return new VehicleWriteOutput { Success = success };
+            return new VehicleWriteOutput() { Success = success };
         }
     }
 }

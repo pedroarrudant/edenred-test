@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component, inject, signal } from '@angular/core';
-import { NonNullableFormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -14,12 +14,17 @@ import { environment } from '../../../environments/environment';
 export class NewVehicle {
   private readonly formBuilder = inject(NonNullableFormBuilder);
   private readonly http = inject(HttpClient);
-
   isSubmitting = signal(false);
   successMessage = signal('');
   errorMessage = signal('');
 
   form = this.formBuilder.group({
+    clientId: this.formBuilder.control<number | null>(null, [
+      Validators.required,
+      Validators.min(1),
+      Validators.max(Number.MAX_SAFE_INTEGER),
+      Validators.pattern(/^\d+$/),
+    ]),
     licensePlate: '',
     manufactureYear: this.formBuilder.control<number | null>(null),
     brand: '',
@@ -27,7 +32,7 @@ export class NewVehicle {
   });
 
   submit(): void {
-    if (this.isSubmitting()) {
+    if (this.isSubmitting() || this.form.invalid) {
       return;
     }
 
@@ -41,8 +46,12 @@ export class NewVehicle {
         this.form.reset();
         this.isSubmitting.set(false);
       },
-      error: () => {
-        this.errorMessage.set('Could not create the vehicle.');
+      error: (response: HttpErrorResponse) => {
+        this.errorMessage.set(
+          response.status === 400 && typeof response.error === 'string'
+            ? response.error
+            : 'Could not create the vehicle.',
+        );
         this.isSubmitting.set(false);
       },
     });

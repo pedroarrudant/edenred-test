@@ -1,5 +1,4 @@
-﻿using System;
-namespace EdenredTest.Application.Shared.Configuration
+﻿namespace EdenredTest.Application.Shared.Configuration
 {
     public class DatabaseOptions
     {

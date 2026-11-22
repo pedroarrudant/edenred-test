@@ -1,6 +1,4 @@
-﻿using System;
-using MediatR;
-using MediatR.Pipeline;
+﻿using MediatR.Pipeline;
 using Microsoft.Extensions.Logging;
 
 namespace EdenredTest.Application.Shared.Middlewares

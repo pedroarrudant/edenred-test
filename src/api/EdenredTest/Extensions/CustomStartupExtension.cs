@@ -11,36 +11,22 @@ namespace EdenredTest.Extensions
         public static IServiceCollection AddCustomSwagger(this IServiceCollection services)
         {
             services.AddSwaggerGen(options =>
-                options.SwaggerDoc("v1", new OpenApiInfo {
+                options.SwaggerDoc("v1", new OpenApiInfo
+                {
                     Version = "v1",
                     Title = "Edenred test",
                     Description = "Edenred test for admission",
-                    License = new OpenApiLicense {
+                    License = new OpenApiLicense
+                    {
                         Name = "Verson generated in " + $"{File.GetCreationTime(Assembly.GetExecutingAssembly().Location): dd/MM/yyyy}"
-                        },
-                    Contact = new OpenApiContact {
+                    },
+                    Contact = new OpenApiContact
+                    {
                         Name = "Pedro Arruda",
                         Email = "pedro.arruda@outlook.com.br"
-                        }
-                    })
+                    }
+                })
                 );
-
-            return services;
-        }
-
-        public static IServiceCollection AddHttpClientServices(this IServiceCollection services)
-        {
-        //    services.AddHttpClient("apiteste", (sp, ctx) =>
-        //    {
-        //        var options = sp.GetRequiredService<IOptions<ExternalApiOptions>>();
-
-        //        ctx.BaseAddress = options.Value;
-        //        ctx.Timeout = options.Value;
-        //    })
-        //    .AddPolicyHandler(x => 
-        //    {
-        //        return HttpPolicyExtensions.HandleTransientHttpError().WaitAndRetryAsync(1, retryAttempt => TimeSpan.FromSeconds(1));
-        //    });
 
             return services;
         }

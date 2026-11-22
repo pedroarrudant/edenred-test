@@ -1,6 +1,4 @@
-﻿using System.Text.Json.Serialization;
-
-namespace EdenredTest.Application.Shared.Domain
+﻿namespace EdenredTest.Application.Shared.Domain
 {
     public class Client
     {

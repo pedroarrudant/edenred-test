@@ -2,6 +2,13 @@
 
 <form [formGroup]="form" (ngSubmit)="submit()" class="vehicle-form">
   <mat-form-field appearance="outline">
+    <mat-label>Client ID</mat-label>
+    <input matInput type="number" formControlName="clientId" min="1" step="1" required />
+    <mat-hint>Find the ID on the registered clients page.</mat-hint>
+    <mat-error>Enter a valid client ID.</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
     <mat-label>License plate</mat-label>
     <input matInput formControlName="licensePlate" />
   </mat-form-field>
@@ -21,7 +28,7 @@
     <input matInput formControlName="model" />
   </mat-form-field>
 
-  <button mat-raised-button type="submit" [disabled]="isSubmitting()">
+  <button mat-raised-button type="submit" [disabled]="isSubmitting() || form.invalid">
     {{ isSubmitting() ? 'Saving…' : 'Save vehicle' }}
   </button>
 

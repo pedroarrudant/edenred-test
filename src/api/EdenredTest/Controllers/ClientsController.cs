@@ -1,14 +1,13 @@
-﻿using EdenredTest.Application.Features.GetClientById.Models;
-using EdenredTest.Application.Features.InsertClient.Models;
+﻿using EdenredTest.Application.Features.DeleteClient.Models;
 using EdenredTest.Application.Features.GetAllClients.Models;
-using EdenredTest.Application.Features.DeleteClient.Models;
+using EdenredTest.Application.Features.GetClientById.Models;
+using EdenredTest.Application.Features.InsertClient.Models;
 using EdenredTest.Application.Features.UpdateClient.Models;
+using EdenredTest.Application.Shared.Domain;
 using EdenredTest.Controllers.Requests;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Npgsql;
 using System.Net;
-using EdenredTest.Application.Shared.Domain;
 
 namespace EdenredTest.Controllers
 {
@@ -46,7 +45,7 @@ namespace EdenredTest.Controllers
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
         public async Task<IActionResult> InsertClient([FromBody] InsertClientRequest request, CancellationToken cancellationToken)
         {
-            var client = new Client() 
+            var client = new Client()
             {
                 FullName = request.FullName,
                 IdentificationDocument = request.IdentificationDocument,
@@ -87,7 +86,6 @@ namespace EdenredTest.Controllers
         public async Task<IActionResult> DeleteClient([FromRoute] long id, CancellationToken cancellationToken)
         {
             var deleted = await _mediator.Send(new DeleteClientInput { Id = id }, cancellationToken);
-
             return deleted ? NoContent() : NotFound();
         }
     }

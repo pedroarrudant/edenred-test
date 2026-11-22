@@ -21,7 +21,7 @@ namespace EdenredTestTests.Handlers
         }
 
         [Fact]
-        public async Task Should_Create_Client_With_Success() 
+        public async Task Should_Create_Client_With_Success()
         {
             //Arrange
             _repository.Setup(m => m.InsertClientAsync(It.IsAny<Client>(), new CancellationToken())).ReturnsAsync(true);

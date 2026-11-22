@@ -52,6 +52,33 @@ namespace EdenredTestTests.Handlers
         }
 
         [Fact]
+        public async Task Should_Reject_Vehicle_Without_A_Client()
+        {
+            var vehicle = VehicleStatic.Create();
+            vehicle.ClientId = null;
+            var handler = new InsertVehicleUseCaseHandler(_repository.Object, _logger.Object);
+
+            var result = await handler.Handle(new InsertVehicleInput { Vehicle = vehicle }, CancellationToken.None);
+
+            Assert.False(result.Success);
+            Assert.Equal(Messages.Error.ClientRequired, result.Message);
+            _repository.Verify(r => r.InsertVehicleAsync(It.IsAny<Vehicle>(), CancellationToken.None), Times.Never);
+        }
+
+        [Fact]
+        public async Task Should_Reject_Vehicle_When_Client_Does_Not_Exist()
+        {
+            var vehicle = VehicleStatic.Create();
+            _repository.Setup(r => r.InsertVehicleAsync(vehicle, CancellationToken.None)).ReturnsAsync(false);
+            var handler = new InsertVehicleUseCaseHandler(_repository.Object, _logger.Object);
+
+            var result = await handler.Handle(new InsertVehicleInput { Vehicle = vehicle }, CancellationToken.None);
+
+            Assert.False(result.Success);
+            Assert.Equal(Messages.Error.VehicleClientNotFound, result.Message);
+        }
+
+        [Fact]
         public async Task Should_Create_Vehicle_With_Success()
         {
             // Arrange
