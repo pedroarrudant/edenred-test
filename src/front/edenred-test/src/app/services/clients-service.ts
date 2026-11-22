@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { InsertClientRequest } from '../models/insert-client-request';
 import { environment } from '../../environments/environment';
+import { Client } from '../models/client';
 
 @Injectable({
   providedIn: 'root',
@@ -14,4 +15,8 @@ export class ClientsService {
   create(request: InsertClientRequest): Observable<unknown> {
     return this.http.post<unknown>(this.apiUrl, request);
   }
+
+    getAll(): Observable<Client[]> {
+    return this.http.get<Client[]>(this.apiUrl);
+    }  
 }
