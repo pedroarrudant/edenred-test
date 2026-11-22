@@ -1,11 +1,10 @@
-﻿using System.Reflection;
+﻿using Autofac;
+using Autofac.Extensions.DependencyInjection;
 using EdenredTest.Application.Shared.AutofacModules;
 using EdenredTest.Application.Shared.Filters;
-using Autofac;
-using Autofac.Extensions.DependencyInjection;
 using EdenredTest.Extensions;
-using MassTransit;
 using MediatR;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +20,19 @@ builder.Services.AddCustomConfiguration(builder.Configuration);
 builder.Services.AddHttpClientServices();
 builder.Services.AddAutofac();
 builder.Services.AddMediatR(Assembly.GetExecutingAssembly(), Assembly.Load(new AssemblyName("EdenredTest.Application")));
+
+var allowedOrigins =
+    builder.Configuration.GetSection("Cors:AllowedOrigins").Get<string[]>() ?? [];
+
+builder.Services.AddCors(options => {
+    options.AddPolicy("FrontEnd", policy =>
+    {
+        policy
+            .WithOrigins(allowedOrigins)
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
+});
 
 builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
 builder.Host.ConfigureContainer<ContainerBuilder>(builder => builder.RegisterModule(new ModuleApplication()));
@@ -38,6 +50,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors("FrontEnd");
 
 app.UseAuthorization();
 

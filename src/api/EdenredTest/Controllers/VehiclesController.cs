@@ -12,7 +12,7 @@ using System.Net;
 namespace EdenredTest.Controllers
 {
     [ApiController]
-    [Route("vehicles")]
+    [Route("/api/vehicles")]
     public class VehiclesController : Controller
     {
         private readonly IMediator _mediator;

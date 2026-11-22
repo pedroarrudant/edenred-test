@@ -13,7 +13,7 @@ using EdenredTest.Application.Shared.Domain;
 namespace EdenredTest.Controllers
 {
     [ApiController]
-    [Route("clients")]
+    [Route("/api/clients")]
     public class ClientsController : Controller
     {
         private readonly ILogger<ClientsController> _logger;
