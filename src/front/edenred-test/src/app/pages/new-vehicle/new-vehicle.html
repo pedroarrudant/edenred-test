@@ -1,0 +1,35 @@
+<h1>Create vehicle</h1>
+
+<form [formGroup]="form" (ngSubmit)="submit()" class="vehicle-form">
+  <mat-form-field appearance="outline">
+    <mat-label>License plate</mat-label>
+    <input matInput formControlName="licensePlate" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Manufacture year</mat-label>
+    <input matInput type="number" formControlName="manufactureYear" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Brand</mat-label>
+    <input matInput formControlName="brand" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Model</mat-label>
+    <input matInput formControlName="model" />
+  </mat-form-field>
+
+  <button mat-raised-button type="submit" [disabled]="isSubmitting()">
+    {{ isSubmitting() ? 'Saving…' : 'Save vehicle' }}
+  </button>
+
+  @if (successMessage()) {
+    <p>{{ successMessage() }}</p>
+  }
+
+  @if (errorMessage()) {
+    <p>{{ errorMessage() }}</p>
+  }
+</form>

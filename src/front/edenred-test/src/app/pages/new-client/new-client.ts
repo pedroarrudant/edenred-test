@@ -1,5 +1,6 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import {
+  FormGroupDirective,
   NonNullableFormBuilder,
   ReactiveFormsModule,
   Validators,
@@ -8,6 +9,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ClientsService } from '../../services/clients-service';
+import { environment } from '../../../environments/environment';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   imports: [
@@ -21,11 +24,11 @@ import { ClientsService } from '../../services/clients-service';
 })
 export class NewClient {
   private readonly formBuilder = inject(NonNullableFormBuilder);
-  private readonly clientsService = inject(ClientsService);
+  private readonly http = inject(HttpClient);
 
-  isSubmitting = false;
-  successMessage = '';
-  errorMessage = '';
+  isSubmitting = signal(false);
+  successMessage = signal('');
+  errorMessage = signal('');
 
   form = this.formBuilder.group({
     fullName: ['', Validators.required],
@@ -35,26 +38,24 @@ export class NewClient {
     telephoneNumber: ['', Validators.required],
   });
 
-  submit(): void {
-    this.form.markAllAsTouched();
-
-    if (this.form.invalid || this.isSubmitting) {
+  submit(formDirective: FormGroupDirective): void {
+    if (this.isSubmitting()) {
       return;
     }
 
-    this.isSubmitting = true;
-    this.successMessage = '';
-    this.errorMessage = '';
+    this.isSubmitting.set(true);
+    this.successMessage.set('');
+    this.errorMessage.set('');
 
-    this.clientsService.create(this.form.getRawValue()).subscribe({
+    this.http.post<void>(`${environment.apiUrl}/clients`, this.form.getRawValue()).subscribe({
       next: () => {
-        this.successMessage = 'Client created successfully.';
-        this.form.reset();
-        this.isSubmitting = false;
+        this.successMessage.set('Client created successfully.');
+        formDirective.resetForm();
+        this.isSubmitting.set(false);
       },
       error: () => {
-        this.errorMessage = 'Could not create the client.';
-        this.isSubmitting = false;
+        this.errorMessage.set('Could not create the client.');
+        this.isSubmitting.set(false);
       },
     });
   }
